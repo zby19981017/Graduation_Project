@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.park.mapper.ViewRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.park.pojo.ViewRecord" >
+    <result column="RID" property="rid" jdbcType="INTEGER" />
+    <result column="CarNumber" property="carnumber" jdbcType="VARCHAR" />
+    <result column="ParkPrice" property="parkprice" jdbcType="INTEGER" />
+    <result column="InTime" property="intime" jdbcType="TIMESTAMP" />
+    <result column="OutTime" property="outtime" jdbcType="TIMESTAMP" />
+    <result column="Position" property="position" jdbcType="VARCHAR" />
+    <result column="CarState" property="carstate" jdbcType="INTEGER" />
+    <result column="CarStateDes" property="carstatedes" jdbcType="VARCHAR" />
+    <result column="Level" property="level" jdbcType="INTEGER" />
+    <result column="LvelDes" property="lveldes" jdbcType="VARCHAR" />
+    <result column="StartTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="EndTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="PositionName" property="positionname" jdbcType="VARCHAR" />
+    <result column="PositionState" property="positionstate" jdbcType="INTEGER" />
+    <result column="PositionStateDes" property="positionstatedes" jdbcType="VARCHAR" />
+    <result column="BSTime" property="bstime" jdbcType="TIMESTAMP" />
+    <result column="BETime" property="betime" jdbcType="TIMESTAMP" />
+    <result column="StartTimeString" property="starttimestring" jdbcType="VARCHAR" />
+    <result column="EndTimeString" property="endtimestring" jdbcType="VARCHAR" />
+    <result column="BSTimeString" property="bstimestring" jdbcType="VARCHAR" />
+    <result column="BETimeString" property="betimestring" jdbcType="VARCHAR" />
+    <result column="InTimeString" property="intimestring" jdbcType="VARCHAR" />
+    <result column="OutTimeString" property="outtimestring" jdbcType="VARCHAR" />
+    <result column="Frequency" property="frequency" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    RID, CarNumber, ParkPrice, InTime, OutTime, Position, CarState, CarStateDes, Level, 
+    LvelDes, StartTime, EndTime, PositionName, PositionState, PositionStateDes, BSTime, 
+    BETime, StartTimeString, EndTimeString, BSTimeString, BETimeString, InTimeString, 
+    OutTimeString, Frequency
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.park.pojo.ViewRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from view_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.park.pojo.ViewRecordExample" >
+    delete from view_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.park.pojo.ViewRecord" >
+    insert into view_record (RID, CarNumber, ParkPrice, 
+      InTime, OutTime, Position, 
+      CarState, CarStateDes, Level, 
+      LvelDes, StartTime, EndTime, 
+      PositionName, PositionState, PositionStateDes, 
+      BSTime, BETime, StartTimeString, 
+      EndTimeString, BSTimeString, BETimeString, 
+      InTimeString, OutTimeString, Frequency
+      )
+    values (#{rid,jdbcType=INTEGER}, #{carnumber,jdbcType=VARCHAR}, #{parkprice,jdbcType=INTEGER}, 
+      #{intime,jdbcType=TIMESTAMP}, #{outtime,jdbcType=TIMESTAMP}, #{position,jdbcType=VARCHAR}, 
+      #{carstate,jdbcType=INTEGER}, #{carstatedes,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, 
+      #{lveldes,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{positionname,jdbcType=VARCHAR}, #{positionstate,jdbcType=INTEGER}, #{positionstatedes,jdbcType=VARCHAR}, 
+      #{bstime,jdbcType=TIMESTAMP}, #{betime,jdbcType=TIMESTAMP}, #{starttimestring,jdbcType=VARCHAR}, 
+      #{endtimestring,jdbcType=VARCHAR}, #{bstimestring,jdbcType=VARCHAR}, #{betimestring,jdbcType=VARCHAR}, 
+      #{intimestring,jdbcType=VARCHAR}, #{outtimestring,jdbcType=VARCHAR}, #{frequency,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.park.pojo.ViewRecord" >
+    insert into view_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        RID,
+      </if>
+      <if test="carnumber != null" >
+        CarNumber,
+      </if>
+      <if test="parkprice != null" >
+        ParkPrice,
+      </if>
+      <if test="intime != null" >
+        InTime,
+      </if>
+      <if test="outtime != null" >
+        OutTime,
+      </if>
+      <if test="position != null" >
+        Position,
+      </if>
+      <if test="carstate != null" >
+        CarState,
+      </if>
+      <if test="carstatedes != null" >
+        CarStateDes,
+      </if>
+      <if test="level != null" >
+        Level,
+      </if>
+      <if test="lveldes != null" >
+        LvelDes,
+      </if>
+      <if test="starttime != null" >
+        StartTime,
+      </if>
+      <if test="endtime != null" >
+        EndTime,
+      </if>
+      <if test="positionname != null" >
+        PositionName,
+      </if>
+      <if test="positionstate != null" >
+        PositionState,
+      </if>
+      <if test="positionstatedes != null" >
+        PositionStateDes,
+      </if>
+      <if test="bstime != null" >
+        BSTime,
+      </if>
+      <if test="betime != null" >
+        BETime,
+      </if>
+      <if test="starttimestring != null" >
+        StartTimeString,
+      </if>
+      <if test="endtimestring != null" >
+        EndTimeString,
+      </if>
+      <if test="bstimestring != null" >
+        BSTimeString,
+      </if>
+      <if test="betimestring != null" >
+        BETimeString,
+      </if>
+      <if test="intimestring != null" >
+        InTimeString,
+      </if>
+      <if test="outtimestring != null" >
+        OutTimeString,
+      </if>
+      <if test="frequency != null" >
+        Frequency,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="carnumber != null" >
+        #{carnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="parkprice != null" >
+        #{parkprice,jdbcType=INTEGER},
+      </if>
+      <if test="intime != null" >
+        #{intime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outtime != null" >
+        #{outtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="carstate != null" >
+        #{carstate,jdbcType=INTEGER},
+      </if>
+      <if test="carstatedes != null" >
+        #{carstatedes,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="lveldes != null" >
+        #{lveldes,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positionname != null" >
+        #{positionname,jdbcType=VARCHAR},
+      </if>
+      <if test="positionstate != null" >
+        #{positionstate,jdbcType=INTEGER},
+      </if>
+      <if test="positionstatedes != null" >
+        #{positionstatedes,jdbcType=VARCHAR},
+      </if>
+      <if test="bstime != null" >
+        #{bstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="betime != null" >
+        #{betime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starttimestring != null" >
+        #{starttimestring,jdbcType=VARCHAR},
+      </if>
+      <if test="endtimestring != null" >
+        #{endtimestring,jdbcType=VARCHAR},
+      </if>
+      <if test="bstimestring != null" >
+        #{bstimestring,jdbcType=VARCHAR},
+      </if>
+      <if test="betimestring != null" >
+        #{betimestring,jdbcType=VARCHAR},
+      </if>
+      <if test="intimestring != null" >
+        #{intimestring,jdbcType=VARCHAR},
+      </if>
+      <if test="outtimestring != null" >
+        #{outtimestring,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null" >
+        #{frequency,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.park.pojo.ViewRecordExample" resultType="java.lang.Integer" >
+    select count(*) from view_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update view_record
+    <set >
+      <if test="record.rid != null" >
+        RID = #{record.rid,jdbcType=INTEGER},
+      </if>
+      <if test="record.carnumber != null" >
+        CarNumber = #{record.carnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parkprice != null" >
+        ParkPrice = #{record.parkprice,jdbcType=INTEGER},
+      </if>
+      <if test="record.intime != null" >
+        InTime = #{record.intime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.outtime != null" >
+        OutTime = #{record.outtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.position != null" >
+        Position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carstate != null" >
+        CarState = #{record.carstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.carstatedes != null" >
+        CarStateDes = #{record.carstatedes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        Level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.lveldes != null" >
+        LvelDes = #{record.lveldes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        StartTime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null" >
+        EndTime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.positionname != null" >
+        PositionName = #{record.positionname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionstate != null" >
+        PositionState = #{record.positionstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionstatedes != null" >
+        PositionStateDes = #{record.positionstatedes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bstime != null" >
+        BSTime = #{record.bstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.betime != null" >
+        BETime = #{record.betime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.starttimestring != null" >
+        StartTimeString = #{record.starttimestring,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endtimestring != null" >
+        EndTimeString = #{record.endtimestring,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bstimestring != null" >
+        BSTimeString = #{record.bstimestring,jdbcType=VARCHAR},
+      </if>
+      <if test="record.betimestring != null" >
+        BETimeString = #{record.betimestring,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intimestring != null" >
+        InTimeString = #{record.intimestring,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outtimestring != null" >
+        OutTimeString = #{record.outtimestring,jdbcType=VARCHAR},
+      </if>
+      <if test="record.frequency != null" >
+        Frequency = #{record.frequency,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update view_record
+    set RID = #{record.rid,jdbcType=INTEGER},
+      CarNumber = #{record.carnumber,jdbcType=VARCHAR},
+      ParkPrice = #{record.parkprice,jdbcType=INTEGER},
+      InTime = #{record.intime,jdbcType=TIMESTAMP},
+      OutTime = #{record.outtime,jdbcType=TIMESTAMP},
+      Position = #{record.position,jdbcType=VARCHAR},
+      CarState = #{record.carstate,jdbcType=INTEGER},
+      CarStateDes = #{record.carstatedes,jdbcType=VARCHAR},
+      Level = #{record.level,jdbcType=INTEGER},
+      LvelDes = #{record.lveldes,jdbcType=VARCHAR},
+      StartTime = #{record.starttime,jdbcType=TIMESTAMP},
+      EndTime = #{record.endtime,jdbcType=TIMESTAMP},
+      PositionName = #{record.positionname,jdbcType=VARCHAR},
+      PositionState = #{record.positionstate,jdbcType=INTEGER},
+      PositionStateDes = #{record.positionstatedes,jdbcType=VARCHAR},
+      BSTime = #{record.bstime,jdbcType=TIMESTAMP},
+      BETime = #{record.betime,jdbcType=TIMESTAMP},
+      StartTimeString = #{record.starttimestring,jdbcType=VARCHAR},
+      EndTimeString = #{record.endtimestring,jdbcType=VARCHAR},
+      BSTimeString = #{record.bstimestring,jdbcType=VARCHAR},
+      BETimeString = #{record.betimestring,jdbcType=VARCHAR},
+      InTimeString = #{record.intimestring,jdbcType=VARCHAR},
+      OutTimeString = #{record.outtimestring,jdbcType=VARCHAR},
+      Frequency = #{record.frequency,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

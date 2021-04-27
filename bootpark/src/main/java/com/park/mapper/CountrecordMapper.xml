@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.park.mapper.CountrecordMapper" >
+  <resultMap id="BaseResultMap" type="com.park.pojo.Countrecord" >
+    <id column="CountID" property="countid" jdbcType="INTEGER" />
+    <result column="CountCarNumber" property="countcarnumber" jdbcType="VARCHAR" />
+    <result column="CountPay" property="countpay" jdbcType="INTEGER" />
+    <result column="CountLevel" property="countlevel" jdbcType="VARCHAR" />
+    <result column="CountYearMonth" property="countyearmonth" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CountID, CountCarNumber, CountPay, CountLevel, CountYearMonth
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.park.pojo.CountrecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from countrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from countrecord
+    where CountID = #{countid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from countrecord
+    where CountID = #{countid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.park.pojo.CountrecordExample" >
+    delete from countrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.park.pojo.Countrecord" >
+    insert into countrecord (CountID, CountCarNumber, CountPay, 
+      CountLevel, CountYearMonth)
+    values (#{countid,jdbcType=INTEGER}, #{countcarnumber,jdbcType=VARCHAR}, #{countpay,jdbcType=INTEGER}, 
+      #{countlevel,jdbcType=VARCHAR}, #{countyearmonth,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.park.pojo.Countrecord" >
+    insert into countrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="countid != null" >
+        CountID,
+      </if>
+      <if test="countcarnumber != null" >
+        CountCarNumber,
+      </if>
+      <if test="countpay != null" >
+        CountPay,
+      </if>
+      <if test="countlevel != null" >
+        CountLevel,
+      </if>
+      <if test="countyearmonth != null" >
+        CountYearMonth,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="countid != null" >
+        #{countid,jdbcType=INTEGER},
+      </if>
+      <if test="countcarnumber != null" >
+        #{countcarnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="countpay != null" >
+        #{countpay,jdbcType=INTEGER},
+      </if>
+      <if test="countlevel != null" >
+        #{countlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="countyearmonth != null" >
+        #{countyearmonth,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.park.pojo.CountrecordExample" resultType="java.lang.Integer" >
+    select count(*) from countrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update countrecord
+    <set >
+      <if test="record.countid != null" >
+        CountID = #{record.countid,jdbcType=INTEGER},
+      </if>
+      <if test="record.countcarnumber != null" >
+        CountCarNumber = #{record.countcarnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countpay != null" >
+        CountPay = #{record.countpay,jdbcType=INTEGER},
+      </if>
+      <if test="record.countlevel != null" >
+        CountLevel = #{record.countlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countyearmonth != null" >
+        CountYearMonth = #{record.countyearmonth,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update countrecord
+    set CountID = #{record.countid,jdbcType=INTEGER},
+      CountCarNumber = #{record.countcarnumber,jdbcType=VARCHAR},
+      CountPay = #{record.countpay,jdbcType=INTEGER},
+      CountLevel = #{record.countlevel,jdbcType=VARCHAR},
+      CountYearMonth = #{record.countyearmonth,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.park.pojo.Countrecord" >
+    update countrecord
+    <set >
+      <if test="countcarnumber != null" >
+        CountCarNumber = #{countcarnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="countpay != null" >
+        CountPay = #{countpay,jdbcType=INTEGER},
+      </if>
+      <if test="countlevel != null" >
+        CountLevel = #{countlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="countyearmonth != null" >
+        CountYearMonth = #{countyearmonth,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CountID = #{countid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.park.pojo.Countrecord" >
+    update countrecord
+    set CountCarNumber = #{countcarnumber,jdbcType=VARCHAR},
+      CountPay = #{countpay,jdbcType=INTEGER},
+      CountLevel = #{countlevel,jdbcType=VARCHAR},
+      CountYearMonth = #{countyearmonth,jdbcType=VARCHAR}
+    where CountID = #{countid,jdbcType=INTEGER}
+  </update>
+</mapper>
