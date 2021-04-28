@@ -149,8 +149,7 @@
                 请输入车牌进入：
                 <input class="" id="carnumber" name="carnumber" minlength="2" type="text" required/>
                 <br>
-                <input type="file" id="importFile" />
-<%--                <input type="text" id="ppath"/>--%>
+                <input type="file" name="importFile1" />
                 <input type="button" value="确认" onclick="upload()"/>
             </div>
 
@@ -162,6 +161,8 @@
         <form class="form-validate form-horizontal" id="feedback_form"
               action="${pageContext.request.contextPath }/outCar.action" method="post">
             <div class="form-group ">
+                <input type="file" name="importFile2" />
+                <input type="button" value="确认" onclick="upload()"/>
                 请输入车牌离开：
                 <input class="" id="carnumber" name="carnumber" minlength="2" type="text" required/>
             </div>

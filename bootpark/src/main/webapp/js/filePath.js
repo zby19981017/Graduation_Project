@@ -1,11 +1,8 @@
 function upload() {
-    var filename = document.getElementById("importFile").value;
-    // 这时的filename不是 importFile 框中的值
-    // document.getElementById("ppath").value=filename;
-    // document.getElementById("carnumber").value=filename;
-    var filepath = [{
-        path: filename,
-    }]
+    var filename = document.getElementById("importFile1").value;
+    if(filename.equals(null)){
+        filename = document.getElementById("importFile2").value;
+    }
     $.ajax({
         type:'POST',
         data:JSON.stringify(filename),
@@ -13,13 +10,11 @@ function upload() {
         dataType:'json',
         url:'http://localhost:8080/carNumber',
         success:function(data){
-            alert("OK");
+            alert("OK!");
             document.getElementById("carnumber").value=data;
         },
         error:function(e){
-            alert(e);
-            // alert(data);
-            // alert("error");
+            alert("error!");
         },
     })
-}
+};

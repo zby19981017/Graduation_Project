@@ -12,8 +12,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-    	
-        registry.addInterceptor(new Interceptor())
+		/**
+		 * excludePathPatterns: 要排除的路径
+		 * addPathPatterns: 要添加的路径
+		 */
+		registry.addInterceptor(new Interceptor())
         	.excludePathPatterns("/login.action")
         	.excludePathPatterns("/parkIndex.action")
         	.addPathPatterns("/**");
